@@ -7,7 +7,8 @@ const {
     getUserByID,
     getUser,
     DeleteUser,
-    InsertUser
+    InsertUser,
+    LoginUser
 } = require('../models/User');
 
 router.get('/users', async (request, result) => {
@@ -47,6 +48,21 @@ router.get('/:username/:email', async (request, result) => {
         
     } catch (error) {
         console.log("error: " + error);
+    }
+});
+
+router.post('/auth', async (request, result) => {
+    try {
+        const { username, password } = request.body;
+        const verifyUser = await pool.query(LoginUser, [username, password]);
+        if (verifyUser.rowCount) 
+            return result.status(200).send(verifyUser.rows[0]);
+        
+        return result.status(400).send({user: {}});
+        
+    } catch (error) {
+        console.log("error: " + error);
+        result.send({error: error})
     }
 });
 
