@@ -58,7 +58,7 @@ router.post('/auth', async (request, result) => {
         if (verifyUser.rowCount) 
             return result.status(200).send(verifyUser.rows[0]);
         
-        return result.status(400).send({user: {}});
+        return result.status(400).send({user: "Dados inválidos"});
         
     } catch (error) {
         console.log("error: " + error);
