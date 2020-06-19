@@ -10,4 +10,4 @@ require('./app/controller/controller_user')(app)
 require('./app/controller/controller_friend')(app)
 require('./app/controller/controller_movie')(app)
 
-app.listen(port)
+app.listen(port);
